@@ -79,8 +79,7 @@
 <script id="pagesTemplate" type="text/mustache">
     {{#pages}}
     <li>
-        <!--a href="{{path}}">{{title}}</a-->
-        <a href="{{path}}">Welcome to leo's blog.</a>
+        <a href="{{path}}">{{title}}</a>
     </li>
     {{/pages}}
 </script>
@@ -100,7 +99,8 @@ $(document).ready(function() {
         type: "GET",
         dataType: "json",
         success: function(data) {
-            $("#title").html(data.name);
+            //$("#title").html(data.name);
+            $("#title").html('Welecome to leo's blog!);
             data.posts.sort(function(a, b){
                 if (a.date > b.date)
                     return -1;
