@@ -26,7 +26,9 @@
 <div id="md" style="display: none;">
 <!-- markdown -->
 //阻止事件冒泡
+
 function stopBubble(e){
+
 	if (e&&e.stoPropagation){//非IE
 		e.stoPropagation();
 	}else{
@@ -36,7 +38,9 @@ function stopBubble(e){
 
 
 //阻止默认事件
+
 function stopDefault(e){
+
 	if (e&&e.preventDefault){//非IE
 		e.preventDefault();
 	}else{//IE
@@ -48,24 +52,32 @@ function stopDefault(e){
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<p>//阻止事件冒泡
-function stopBubble(e){
-    if (e&amp;&amp;e.stoPropagation){//非IE
-        e.stoPropagation();
-    }else{
-        window.event.cancelBubble = true;
-    }
-}</p>
+<p>//阻止事件冒泡</p>
 
-<p>//阻止默认事件
-function stopDefault(e){
-    if (e&amp;&amp;e.preventDefault){//非IE
-        e.preventDefault();
-    }else{//IE
-        window.event.returnValue = false;
-        return false;
-    }
-}</p>
+<p>function stopBubble(e){</p>
+
+<pre><code>if (e&amp;&amp;e.stoPropagation){//非IE
+    e.stoPropagation();
+}else{
+    window.event.cancelBubble = true;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>//阻止默认事件</p>
+
+<p>function stopDefault(e){</p>
+
+<pre><code>if (e&amp;&amp;e.preventDefault){//非IE
+    e.preventDefault();
+}else{//IE
+    window.event.returnValue = false;
+    return false;
+}
+</code></pre>
+
+<p>}</p>
 <!-- content end -->
 </div>
 <br>
