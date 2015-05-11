@@ -28,6 +28,7 @@
 //一个获取非行间样式的函数
 
 function getStyle(obj,attr,value){
+
 	if(!value){
 		if (obj.currentStyle){
 			return obj.currentStyle(attr);
@@ -44,17 +45,20 @@ function getStyle(obj,attr,value){
 <!-- content -->
 <p>//一个获取非行间样式的函数</p>
 
-<p>function getStyle(obj,attr,value){
-    if(!value){
-        if (obj.currentStyle){
-            return obj.currentStyle(attr);
-        }else{
-            obj.getComputedStyle(attr,false);
-        }
+<p>function getStyle(obj,attr,value){</p>
+
+<pre><code>if(!value){
+    if (obj.currentStyle){
+        return obj.currentStyle(attr);
     }else{
-        obj.style[attr] = value;
+        obj.getComputedStyle(attr,false);
     }
-}</p>
+}else{
+    obj.style[attr] = value;
+}
+</code></pre>
+
+<p>}</p>
 <!-- content end -->
 </div>
 <br>
