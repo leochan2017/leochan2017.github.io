@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+//理解闭包
+
+function a(){
+
+	var i = 0;
+	function b(){
+		alert(++i);
+	}
+	return b;
+}
+
+var c = a();
+
+c();
+
+//这段代码有2个特点：
+
+//1 函数b嵌套在函数a内部
+
+//2 函数a返回函数b
+
+这样在执行完var c = a()后，变量c实际上是指向了函数b , b中用到了变量i
+
+再执行c()后就会弹出窗口显示i的值（第一次为1）
+
+这段代码就创建了一个闭包。
+
+因为函数a外的变量c引用了a内的函数b
+
+当函数a的内部函数b被函数a外的一个变量引用的时候，就创建了一个我们所说的‘闭包’
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>//理解闭包</p>
+
+<p>function a(){</p>
+
+<pre><code>var i = 0;
+function b(){
+    alert(++i);
+}
+return b;
+</code></pre>
+
+<p>}</p>
+
+<p>var c = a();</p>
+
+<p>c();</p>
+
+<p>//这段代码有2个特点：</p>
+
+<p>//1 函数b嵌套在函数a内部</p>
+
+<p>//2 函数a返回函数b</p>
+
+<p>这样在执行完var c = a()后，变量c实际上是指向了函数b , b中用到了变量i</p>
+
+<p>再执行c()后就会弹出窗口显示i的值（第一次为1）</p>
+
+<p>这段代码就创建了一个闭包。</p>
+
+<p>因为函数a外的变量c引用了a内的函数b</p>
+
+<p>当函数a的内部函数b被函数a外的一个变量引用的时候，就创建了一个我们所说的‘闭包’</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "biBao.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
