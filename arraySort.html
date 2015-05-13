@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+/*一个简单的使数组正确排序的方法*/
+
+var arr = [10,23,44,101,45,400,22];
+
+arr.sort();
+
+结果：[10, 101, 22, 23, 400, 44, 45]
+
+很明显，sort不关注数组中的内容是数字还是字母
+他仅仅按照字母表的顺序来进行排序
+卧槽~~这不科学。 不是我们想要的结果
+
+不过我们可以给sort传一个对象，来解决：
+
+
+function sorter(a,b){
+
+	return a - b;
+}
+
+var arr = [10,23,44,101,45,400,22];
+
+arr.sort(sorter);
+
+结果：[10, 22, 23, 44, 45, 101, 400]
+
+
+这样就可以得到我们想要的排序了。
+
+函数sorter接收两个参数，返回一个数值
+
+如果这个值大于0，说明第一个参数大于第二个参数
+
+如果返回0，则表示两个参数相等
+
+如果返回小于0，则第一个参数比第二个参数小。
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>/<em>一个简单的使数组正确排序的方法</em>/</p>
+
+<p>var arr = [10,23,44,101,45,400,22];</p>
+
+<p>arr.sort();</p>
+
+<p>结果：[10, 101, 22, 23, 400, 44, 45]</p>
+
+<p>很明显，sort不关注数组中的内容是数字还是字母
+他仅仅按照字母表的顺序来进行排序
+卧槽~~这不科学。 不是我们想要的结果</p>
+
+<p>不过我们可以给sort传一个对象，来解决：</p>
+
+<p>function sorter(a,b){</p>
+
+<pre><code>return a - b;
+</code></pre>
+
+<p>}</p>
+
+<p>var arr = [10,23,44,101,45,400,22];</p>
+
+<p>arr.sort(sorter);</p>
+
+<p>结果：[10, 22, 23, 44, 45, 101, 400]</p>
+
+<p>这样就可以得到我们想要的排序了。</p>
+
+<p>函数sorter接收两个参数，返回一个数值</p>
+
+<p>如果这个值大于0，说明第一个参数大于第二个参数</p>
+
+<p>如果返回0，则表示两个参数相等</p>
+
+<p>如果返回小于0，则第一个参数比第二个参数小。</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "arraySort.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
