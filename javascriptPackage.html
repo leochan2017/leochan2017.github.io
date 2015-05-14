@@ -43,8 +43,11 @@ var person = function(){
 }();
 
 console.log(person.name);//直接访问没结果为undefined
+
 console.log(person.getName());// 结果： default
+
 console.log(person.setName('leo'));
+
 console.log(person.getName());// 结果： leo
 
 闭包的另一个重要用途是实现面向对象的对象。
@@ -106,10 +109,13 @@ return {
 
 <p>}();</p>
 
-<p>console.log(person.name);//直接访问没结果为undefined
-console.log(person.getName());// 结果： default
-console.log(person.setName('leo'));
-console.log(person.getName());// 结果： leo</p>
+<p>console.log(person.name);//直接访问没结果为undefined</p>
+
+<p>console.log(person.getName());// 结果： default</p>
+
+<p>console.log(person.setName('leo'));</p>
+
+<p>console.log(person.getName());// 结果： leo</p>
 
 <p>闭包的另一个重要用途是实现面向对象的对象。</p>
 
