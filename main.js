@@ -3,7 +3,6 @@ document.body.onload = function(){
 }
 !
 function(a, b) {
-	alert(111);
     "object" == typeof module && "object" == typeof module.exports ? module.exports = a.document ? b(a, !0) : function(a) {
         if (!a.document) throw new Error("jQuery requires a window with a document");
         return b(a)
@@ -5576,5 +5575,4 @@ function() {
     } (b.Controller),
     "undefined" != typeof module && null !== module && (module.exports = b.Manager),
     "undefined" != typeof module && null !== module && (module.exports.Stack = b.Stack)
-	alert(123);
 }.call(this);
