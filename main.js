@@ -1,6 +1,3 @@
-document.body.onload = function(){
-	alert(0);
-}
 !
 function(a, b) {
     "object" == typeof module && "object" == typeof module.exports ? module.exports = a.document ? b(a, !0) : function(a) {
