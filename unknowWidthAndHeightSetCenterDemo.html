@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>div不知宽高页面垂直居中</title>
+		<style>
+		*{margin:0;padding:0;}
+		.test{
+			background-color:red;
+			position:absolute;
+			left:50%;
+			top:50%;
+			word-break:break-all;//英文自动换行
+		}
+		</style>
+	</head>
+	<body>
+			<div class="test">
+				撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒撒大叔大叔的撒大叔大叔的撒
+			</div>
+		<script src="jquery-1.7.2.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				var d = $('.test');
+				d.css('width',d.width());//没了这个，内容就会一直向右挤
+				var marginL = -(d.width() / 2);
+				var marginT = -(d.height() / 2);
+				d.css('margin-left',marginL);
+				d.css('margin-top',marginT);
+			})
+		</script>
+	</body>
+</html>
