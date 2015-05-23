@@ -25,12 +25,62 @@
 	</div>
 <div id="md" style="display: none;">
 <!-- markdown -->
-div不知宽高页面垂直居中
+CSS部分：
+
+		*{margin:0;padding:0;}
+		.test{
+			background-color:red;
+			position:absolute;
+			left:50%;
+			top:50%;
+			word-break:break-all;//英文自动换行
+		}
+
+javascript部分：
+
+$(document).ready(function(){
+
+				var d = $('.test');
+				d.css('width',d.width());//没了这个，内容就会一直向右挤
+				var marginL = -(d.width() / 2);
+				var marginT = -(d.height() / 2);
+				d.css('margin-left',marginL);
+				d.css('margin-top',marginT);
+			})
+
+
+
+点击这里看DEMO
 <!-- markdown end -->
 </div>
 <div class="entry" id="main">
 <!-- content -->
-<p>div不知宽高页面垂直居中</p>
+<p>CSS部分：</p>
+
+<pre><code>    *{margin:0;padding:0;}
+    .test{
+        background-color:red;
+        position:absolute;
+        left:50%;
+        top:50%;
+        word-break:break-all;//英文自动换行
+    }
+</code></pre>
+
+<p>javascript部分：</p>
+
+<p>$(document).ready(function(){</p>
+
+<pre><code>            var d = $('.test');
+            d.css('width',d.width());//没了这个，内容就会一直向右挤
+            var marginL = -(d.width() / 2);
+            var marginT = -(d.height() / 2);
+            d.css('margin-left',marginL);
+            d.css('margin-top',marginT);
+        })
+</code></pre>
+
+<p>点击这里看DEMO</p>
 <!-- content end -->
 </div>
 <br>
