@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>input居中左右各100px</title>
+		<style>
+		*{margin:0;padding:0;}
+		input{ margin:0 auto;display:block; }
+		</style>
+	</head>
+	<body>
+			<input></input>
+		<script src="jquery-1.7.2.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				var input = $('input');
+				var clientW = $('body').width();
+				input.width(clientW - 200);
+			})
+		</script>
+	</body>
+</html>
