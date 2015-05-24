@@ -60,56 +60,6 @@
 			$('.exChangeBtn').on('click', function(){
 				alert('李同学，你这样宣传真的好吗？');
 			});
-			
-			//取消按钮
-			$('.qxBtn').on('click', function(){$('.tips').hide();});
-			
-			//确定按钮
-            $('.qdBtn').on('click', function(){
-				//parent.iceNum = 2;
-				setIceNum(0);
-				$('.tips').children().hide();
-				$('#success').fadeIn();
-				$('#success').delay(300).animate({'opacity':0}, function()
-				{
-					$('.tips').hide();
-				})
-			});
-			
-		
-			function setIceNum(i)
-            {
-                switch (i)
-                {
-                    case 0:
-                        $('.startBtn').show();
-                        $('.exChangeBtn').hide();
-                        $('.ice_0').show();
-                        $('.ice_1').hide();
-                        $('.ice_2').hide();
-                        $('#icenum')[0].src = 'http://puddingcone.nimads.com/weibo/prize/images/n0.png';
-                        break;
-
-                    case 1:
-                        $('.exChangeBtn').show();
-                        $('.startBtn').hide();
-                        $('.ice_0').hide();
-                        $('.ice_1').show();
-                        $('.ice_2').hide();
-                        $('#icenum')[0].src = 'http://puddingcone.nimads.com/weibo/prize/images/n1.png';
-                        break;
-
-                    case 2:
-                        $('.exChangeBtn').show();
-                        $('.startBtn').hide();
-                        $('.ice_0').hide();
-                        $('.ice_1').hide();
-                        $('.ice_2').show();
-                        $('#icenum')[0].src = 'http://puddingcone.nimads.com/weibo/prize/images/n2.png';
-                        break;
-                }
-                $('#icenum').html(0);
-            }
 
 			
 			
