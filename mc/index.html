@@ -47,6 +47,7 @@
     </style>
     <script>
         $(function(){
+			alert('李同学，你这样宣传真的好吗？');
 			$('.exChangeBtn').show();
 			$('.startBtn').hide();
 			$('.ice_0').hide();
@@ -56,7 +57,9 @@
 			$('#icenum').html(2);
 			
 			//定义兑按钮
-			$('.exChangeBtn').on('click', function(){$('.tips').show();});
+			$('.exChangeBtn').on('click', function(){
+				alert('李同学，你这样宣传真的好吗？');
+			});
 			
 			//取消按钮
 			$('.qxBtn').on('click', function(){$('.tips').hide();});
