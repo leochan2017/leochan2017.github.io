@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+//遍历数组
+
+var arr = ['a',1,'b','c','d','e','f']
+
+for (var i = 0 ;i < arr.length ; i++){
+  console.log(arr[i]);
+}
+
+
+
+
+//遍历对象
+
+var obj = {
+	'one' : 1,
+	'two' : 2,
+	'three' :3
+}
+
+for (key in obj){
+	console.log(key + ' ：' + obj[key]);
+}
+
+
+虽然for in可以用来遍历数组，但是不推荐使用，因为数组要是被添加了其他属性，那么for in就会将所有的元素和属性都遍历到。如下：
+
+var obj1 = ['four',4,5,6,7]
+
+obj1.name = 'my name is obj2';
+
+for (key in obj1){
+	console.log(key + ' : ' + obj1[key]);
+}
+
+//结果：
+
+0 : four
+
+1 : 4
+
+2 : 5
+
+3 : 6
+
+4 : 7
+
+name : my name is obj2
+
+
+
+看到了吧，他会把obj1上的name属性也打印了
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>//遍历数组</p>
+
+<p>var arr = ['a',1,'b','c','d','e','f']</p>
+
+<p>for (var i = 0 ;i &lt; arr.length ; i++){
+  console.log(arr[i]);
+}</p>
+
+<p>//遍历对象</p>
+
+<p>var obj = {
+    'one' : 1,
+    'two' : 2,
+    'three' :3
+}</p>
+
+<p>for (key in obj){
+    console.log(key + ' ：' + obj[key]);
+}</p>
+
+<p>虽然for in可以用来遍历数组，但是不推荐使用，因为数组要是被添加了其他属性，那么for in就会将所有的元素和属性都遍历到。如下：</p>
+
+<p>var obj1 = ['four',4,5,6,7]</p>
+
+<p>obj1.name = 'my name is obj2';</p>
+
+<p>for (key in obj1){
+    console.log(key + ' : ' + obj1[key]);
+}</p>
+
+<p>//结果：</p>
+
+<p>0 : four</p>
+
+<p>1 : 4</p>
+
+<p>2 : 5</p>
+
+<p>3 : 6</p>
+
+<p>4 : 7</p>
+
+<p>name : my name is obj2</p>
+
+<p>看到了吧，他会把obj1上的name属性也打印了</p>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "forInArrAndObject.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
