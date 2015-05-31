@@ -28,12 +28,17 @@
 javascript本身没有定义名称空间，但是我们可以根据javascript的对象本身的一些特性来模拟出名称空间来
 
 var leoJsPackage = leoJsPackage || {};
+
 leoJsPackage.util = leoJsPackage.util || {};
+
 leoJsPackage.util.common = {
+
  raiseError : function(message){
+
 	throw new Error(message);
  },
  showMessage : function(info){
+
 	alert(info);
  }
 }
@@ -41,6 +46,7 @@ leoJsPackage.util.common = {
 我们建立了一个leoJsPackage对象，leoJsPackage对象有个util属性，同样util也是一个对象，而common对象则为util的一个属性，当我们想要访问raiseError或者showMessage两个函数时，必须加上leoJsPackage.util.common前缀才可以
 
 如：
+
 leoJsPackage.util.common.raiseError('Sorry ,Error')
 
 leoJsPackage.util.common.showMessage('hello world')
@@ -53,21 +59,31 @@ leoJsPackage.util.common.showMessage('hello world')
 <!-- content -->
 <p>javascript本身没有定义名称空间，但是我们可以根据javascript的对象本身的一些特性来模拟出名称空间来</p>
 
-<p>var leoJsPackage = leoJsPackage || {};
-leoJsPackage.util = leoJsPackage.util || {};
-leoJsPackage.util.common = {
- raiseError : function(message){
-    throw new Error(message);
- },
- showMessage : function(info){
-    alert(info);
- }
+<p>var leoJsPackage = leoJsPackage || {};</p>
+
+<p>leoJsPackage.util = leoJsPackage.util || {};</p>
+
+<p>leoJsPackage.util.common = {</p>
+
+<p>raiseError : function(message){</p>
+
+<pre><code>throw new Error(message);
+</code></pre>
+
+<p>},
+ showMessage : function(info){</p>
+
+<pre><code>alert(info);
+</code></pre>
+
+<p>}
 }</p>
 
 <p>我们建立了一个leoJsPackage对象，leoJsPackage对象有个util属性，同样util也是一个对象，而common对象则为util的一个属性，当我们想要访问raiseError或者showMessage两个函数时，必须加上leoJsPackage.util.common前缀才可以</p>
 
-<p>如：
-leoJsPackage.util.common.raiseError('Sorry ,Error')</p>
+<p>如：</p>
+
+<p>leoJsPackage.util.common.raiseError('Sorry ,Error')</p>
 
 <p>leoJsPackage.util.common.showMessage('hello world')</p>
 <!-- content end -->
