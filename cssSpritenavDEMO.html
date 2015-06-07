@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>背景图合并技术</title>
+	<style>
+		*{margin:0;padding:0;}
+		body{background-color:#323637;}
+		/* 书本上的方式 */
+		.con{width:500px;background:#999;margin-top:40px;}
+		.con .a{height:46px;}
+		.mid{background:url(bg-css-sprite.png) 0 -92px repeat-x;}
+		.left{background:url(bg-css-sprite.png) 0 -46px no-repeat;}
+		.right{background:url(bg-css-sprite.png) right 0 no-repeat;}
+		.right span{margin-left:50px;line-height:46px;}
+		
+		
+		/* leo的另外一种方式 */
+		#nav{margin-top:40px;overflow:hidden;/* 不必声明width和height */}
+		#le,#mi,#ri{height:46px;float:left;}
+		#le,#ri{width:8px;}
+		#le{background:url(bg-css-sprite.png) 0 -46px no-repeat;}
+		#mi{width:800px;background:url(bg-css-sprite.png) 0 -92px repeat-x;}
+		#mi span{margin-left:100px;line-height:46px;}
+		#ri{background:url(bg-css-sprite.png) 0 0 no-repeat;}
+
+		
+		/* 比较标准的导航方式 */
+		.banner-right li a{text-decoration:none;}
+		.banner-right li a:link{color:#000;}
+		.banner-right li a:hover{color:red;}
+		.banner-right ul{list-style-type:none;/* 设置列表的标记为无 */}
+		.banner{width:500px;height:46px;margin:40px auto;background:url(bg-css-sprite.png) 0 -92px repeat-x;overflow:hidden;}
+		.banner-left{height:46px;background:url(bg-css-sprite.png) 0 -46px no-repeat;}
+		.banner-right{height:46px;background:url(bg-css-sprite.png) right 0 no-repeat;line-height:46px;}
+		.banner-right li{padding-left:55px;float:left;/* 让li水平上来的关键 */}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<div class="mid a">
+			<div class="left a">
+				<div class="right a">
+					<span>首页</span>
+					<span>关于我们</span>
+					<span>新闻中心</span>
+					<span>联系方式</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- leo尝试其他方式 -->
+	<div id="nav">
+		<div id="le"></div>
+		<div id="mi">
+			<span>首页</span>
+			<span>关于我们</span>
+			<span>新闻中心</span>
+			<span>联系方式</span>
+		</div>
+		<div id="ri"></div>
+	</div>
+	
+	
+	<!-- 比较标准的导航方式 -->
+	<div class="banner">
+		<div class="banner-left">
+			<ul class="banner-right">
+				<li><a href="###" class="on">首页</a></li>
+				<li><a href="###">关于我们</a></li>
+				<li><a href="###">新闻中心</a></li>
+				<li><a href="###">联系方式</a></li>
+			</ul>
+		</div>
+	</div>
+	
+</body>
+</html>
