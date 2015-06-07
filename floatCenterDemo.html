@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>浮动元素居中</title>
+	<style>
+		*{margin:0;padding:0}
+		/*
+			浮动元素居中出现的条件：
+			1，首先是内部元素需要设置宽高
+			2，元素需要同行显示
+			3，元素需要居中
+			
+			分析：
+			如果想对一个元素设置宽高，那么这个元素就不能是行内元素，只能是块状元素
+			A：如果内部开始为块状元素时，如p元素，只能用float使其同行显示(float又会改变其显示方式)，但如果进行居中处理，则发现margin:0 auto;会失效
+			
+			B：如果内部开始为行内元素，因为不能设置宽高，所以需要将他设置为块元素display:block;然后float:left，但是此时会发现父级元素的text-align:center也失效
+			
+			
+			所以解决办法：
+				设置外层div的text-align:center;然后设置内层元素的display:inline-block;
+		*/
+		div{width:1024px;height:100%;background:#ede;margin:0 auto;text-align:center;}
+		span{width:100px;height:80px;background-color:#ada;border:2px #000 solid;display:inline-block;}
+	</style>
+</head>
+<body>
+	<div>
+		<span>s1</span>
+		<span>s2</span>
+		<span>s3</span>
+		<span>s4</span>
+		<span>s5</span>
+	</div>
+</body>
+</html>
