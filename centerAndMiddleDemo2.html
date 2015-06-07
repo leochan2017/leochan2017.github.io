@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>内部元素水平垂直居中</title>
+	<style>
+		*{margin:0;padding:0}
+		/* 功能分析：外部和内部元素的宽高都未知，需要内部元素在外部元素中做到水平和垂直两个方向居中*/
+		
+		div{width:500px;height:300px;/* 我们假设外部元素的宽高是500和300 */}
+		
+		/*	方法二：
+				在要浮动的外部元素外再插入一个多余的div
+				设置此div的height:50%;margin-bottom:-要浮动的外部元素的高
+				然后要浮动的元素清除浮动即可。
+			优点：
+				适用于所有浏览器，没有足够的空间时（如窗口缩小）要浮动的外部元素不会被截断，滚动条会出现
+			缺点：
+				需要额外的空元素
+		*/
+		.duoyu{height:50%;margin-bottom:-150px;float:left;}
+		.div2{background:#bab;text-align:center;clear:both;}
+		
+	</style>
+</head>
+<body>
+	<div class="duoyu"></div>
+	<div class="div2">
+		<span>方法二</span>
+	</div>
+</body>
+</html>
