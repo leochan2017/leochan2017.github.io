@@ -1,1 +1,28 @@
-为啥保存不了？
+<html>
+<head>
+	<title>内部元素水平垂直居中</title>
+	<style>
+		*{margin:0;padding:0}
+		/* 功能分析：外部和内部元素的宽高都未知，需要内部元素在外部元素中做到水平和垂直两个方向居中*/
+		
+		div{width:500px;height:300px;/* 我们假设外部元素的宽高是500和300 */}
+		
+		
+		/*	方法三：
+				使用position:absolute
+				这个div倍设置为top:0;bottom:0;但是他有固定高度，并不能上下间距都设置为0，因此margin:0;会使他居中
+				使用margin:auto;使块级元素居中是很简单的
+			缺点：
+				IE（8）中无效，无足够空间时，div会被截断，但不出现滚动条
+		*/
+		.inner{background:#faf;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;text-align:center;}
+	</style>
+</head>
+<body>
+	<div class="div3">
+		<div class="inner">
+			<span>方法三</span>
+		</div>
+	</div>
+</body>
+</html>
