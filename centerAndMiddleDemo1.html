@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>内部元素水平垂直居中</title>
+	<style>
+		*{margin:0;padding:0}
+		/* 功能分析：外部和内部元素的宽高都未知，需要内部元素在外部元素中做到水平和垂直两个方向居中*/
+		
+		div{width:500px;height:300px;/* 我们假设外部元素的宽高是500和300 */}
+		
+		/* 方法一：
+				display:table-cell表示使用的是表格的布局方式
+				只有在这种display表现的情况下，才能实现垂直居中
+				水平居中就一个text-align:center就可以了啦
+				vertical-align:middld表示的是垂直方向的居中
+		*/
+		.div1{background:#ada;display:table-cell;text-align:center;vertical-align:middle;}
+		
+	</style>
+</head>
+<body>
+	<div class="div1">
+		<span>方法一</span>
+	</div>
+</body>
+</html>
