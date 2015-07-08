@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Keywords" content="blog"/>
+    <meta name="Description" content="blog"/>
+    <title>Simple</title>
+    <link rel="shortcut icon" href="/static/favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+<div class="main">
+    <div class="header">
+    	<ul id="pages">
+            <li><a href="/">home</a></li>
+            <li><a href="/#/tags">tags</a></li>
+            <li><a href="/#/archive">archive</a></li>
+    	</ul>
+    </div>
+	<div class="wrap-header">
+	<h1>
+    <a href="/" id="title"></a>
+	</h1>
+	</div>
+<div id="md" style="display: none;">
+<!-- markdown -->
+1、localStorage和sessionStorage均只能存储字符串类型的对象
+
+2、localStorage生命周期是永久
+
+3、sessionStorage生命周期为当前窗口或标签页，关闭了，数据就没了
+
+4、不同浏览器无法共享localStorage或sessionStorage中的信息。
+
+5、相同浏览器的不同页面间可以共享相同的localStorage（页面属于相同域名和端口），但是不同页面或标签页间无法共享sessionStorage的信息。这里需要注意的是，页面及标签页仅指顶级窗口，如果一个标签页包含多个iframe标签且他们属于同源页面，那么他们之间是可以共享sessionStorage的。
+同源的判断规则：
+http://www.test.com
+https://www.test.com （不同源，因为协议不同）
+http://my.test.com（不同源，因为主机名不同）
+http://www.test.com:8080（不同源，因为端口不同）
+<hr>
+数据存储：
+<pre>
+var arrDisplay = [0, 1, 1, 1];
+//存储，IE6~7 cookie 其他浏览器HTML5本地存储
+
+if (window.localStorage) {
+    localStorage.setItem("menuTitle", arrDisplay);	
+} else {
+    Cookie.write("menuTitle", arrDisplay);	
+}
+</pre>
+<hr>
+数据读取：
+<pre>
+var strStoreDate = window.localStorage? localStorage.getItem("menuTitle"): Cookie.read("menuTitle");
+</pre>
+<hr>
+需要注意的是：虽然我们存储的是数组，但是，实际上存储的的是数组字符化后的字符串(Cookie和localStorage都是)，因此，我们在处理strStoreDate的时候，一定要当作字符串处理，类似下面：
+<pre>
+strStoreDate.split(",").each(function(display, index) {
+    //根据存储的display触发相对应的动作
+});
+</pre>
+<hr>
+<hr>
+在HTML5中，本地存储是一个window的属性，判断浏览器是否支持：
+<pre>
+if(window.localStorage){
+ alert('This browser supports localStorage');
+}else{
+ alert('This browser does NOT support localStorage');
+}
+</pre>
+ 
+
+存储数据的方法就是直接给window.localStorage添加一个属性
+
+例如：window.localStorage.a 或者 window.localStorage["a"]。
+
+它的读取、写、删除操作方法很简单，是以键值对的方式存在的，如下：
+<pre>
+localStorage.a = 3;//设置a为"3"
+localStorage["a"] = "sfsf";//设置a为"sfsf"，覆盖上面的值
+localStorage.setItem("b","isaac");//设置b为"isaac"
+var a1 = localStorage["a"];//获取a的值
+var a2 = localStorage.a;//获取a的值
+var b = localStorage.getItem("b");//获取b的值
+localStorage.removeItem("c");//清除c的值
+</pre>
+ 
+
+推荐使用的自然是getItem()和setItem()，清除键值对使用removeItem()。
+
+如果希望一次性清除所有的键值对，可以使用clear()。另外，HTML5还提供了一个key()方法，可以在不知道有哪些键值的时候使用，如下：
+<pre>
+var storage = window.localStorage;
+function showStorage(){
+ for(var i=0;i<storage.length;i++){
+  //key(i)获得相应的键，再用getItem()方法获得对应的值
+  document.write(storage.key(i)+ " : " + storage.getItem(storage.key(i)) + "<br>");
+ }
+}
+</pre>
+<!-- markdown end -->
+</div>
+<div class="entry" id="main">
+<!-- content -->
+<p>1、localStorage和sessionStorage均只能存储字符串类型的对象</p>
+
+<p>2、localStorage生命周期是永久</p>
+
+<p>3、sessionStorage生命周期为当前窗口或标签页，关闭了，数据就没了</p>
+
+<p>4、不同浏览器无法共享localStorage或sessionStorage中的信息。</p>
+
+<p>5、相同浏览器的不同页面间可以共享相同的localStorage（页面属于相同域名和端口），但是不同页面或标签页间无法共享sessionStorage的信息。这里需要注意的是，页面及标签页仅指顶级窗口，如果一个标签页包含多个iframe标签且他们属于同源页面，那么他们之间是可以共享sessionStorage的。
+同源的判断规则：
+http://www.test.com
+https://www.test.com （不同源，因为协议不同）
+http://my.test.com（不同源，因为主机名不同）
+http://www.test.com:8080（不同源，因为端口不同）</p>
+
+<hr>
+
+<p>数据存储：</p>
+
+<pre>var arrDisplay = [0, 1, 1, 1];
+//存储，IE6~7 cookie 其他浏览器HTML5本地存储
+
+if (window.localStorage) {
+    localStorage.setItem("menuTitle", arrDisplay);    
+} else {
+    Cookie.write("menuTitle", arrDisplay);    
+}
+</pre>
+
+<hr>
+
+<p>数据读取：</p>
+
+<pre>var strStoreDate = window.localStorage? localStorage.getItem("menuTitle"): Cookie.read("menuTitle");
+</pre>
+
+<hr>
+
+<p>需要注意的是：虽然我们存储的是数组，但是，实际上存储的的是数组字符化后的字符串(Cookie和localStorage都是)，因此，我们在处理strStoreDate的时候，一定要当作字符串处理，类似下面：</p>
+
+<pre>strStoreDate.split(",").each(function(display, index) {
+    //根据存储的display触发相对应的动作
+});
+</pre>
+
+<hr>
+
+<hr>
+
+<p>在HTML5中，本地存储是一个window的属性，判断浏览器是否支持：</p>
+
+<pre>if(window.localStorage){
+ alert('This browser supports localStorage');
+}else{
+ alert('This browser does NOT support localStorage');
+}
+</pre>
+
+<p>存储数据的方法就是直接给window.localStorage添加一个属性</p>
+
+<p>例如：window.localStorage.a 或者 window.localStorage["a"]。</p>
+
+<p>它的读取、写、删除操作方法很简单，是以键值对的方式存在的，如下：</p>
+
+<pre>localStorage.a = 3;//设置a为"3"
+localStorage["a"] = "sfsf";//设置a为"sfsf"，覆盖上面的值
+localStorage.setItem("b","isaac");//设置b为"isaac"
+var a1 = localStorage["a"];//获取a的值
+var a2 = localStorage.a;//获取a的值
+var b = localStorage.getItem("b");//获取b的值
+localStorage.removeItem("c");//清除c的值
+</pre>
+
+<p>推荐使用的自然是getItem()和setItem()，清除键值对使用removeItem()。</p>
+
+<p>如果希望一次性清除所有的键值对，可以使用clear()。另外，HTML5还提供了一个key()方法，可以在不知道有哪些键值的时候使用，如下：</p>
+
+<pre>var storage = window.localStorage;
+function showStorage(){
+ for(var i=0;i<storage.length;i++){ key(i)获得相应的键，再用getitem()方法获得对应的值="" document.write(storage.key(i)+="" "="" :="" +="" storage.getitem(storage.key(i))="" "<br="">");
+ }
+}
+</storage.length;i++){></pre>
+<!-- content end -->
+</div>
+<br>
+<br>
+    <div id="disqus_thread"></div>
+	<div class="footer">
+		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
+	</div>
+</div>
+<script src="main.js"></script>
+<script id="content" type="text/mustache">
+    <h1>{{title}}</h1>
+    <div class="tag">
+    {{date}}
+    {{#tags}}
+    <a href="/#/tag/{{name}}">#{{name}}</a>
+    {{/tags}}
+    </div>
+</script>
+<script id="pagesTemplate" type="text/mustache">
+    {{#pages}}
+    <li>
+        <a href="{{path}}">{{title}}</a>
+    </li>
+    {{/pages}}
+</script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "main.json",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            $("#title").html(data.name);
+            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
+            var pagesHtml = pagesTemplate.render({"pages": data.pages});
+            $("#pages").append(pagesHtml);
+            //path
+            var path = "html5localstorage.html";
+            //path end
+            var now = 0;
+            for (var i = 0; i < data.posts.length; ++i)
+                if (path == data.posts[i].path)
+                    now = i;
+            var post = data.posts[now];
+            var tmp = post.tags.split(" ");
+            var tags = [];
+            for (var i = 0; i < tmp.length; ++i)
+                if (tmp[i].length > 0)
+                    tags.push({"name": tmp[i]});
+            var contentTemplate = Hogan.compile($("#content").html());
+            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
+            $("#main").prepend(contentHtml);
+            if (data.disqus_shortname.length > 0) {
+                var disqus_shortname = data.disqus_shortname;
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            }
+        }
+    });
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
+</script>
+</body>
+</html>
