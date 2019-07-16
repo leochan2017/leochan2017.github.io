@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>关于localStorage和sessionStorage | Leo 前端开发工程师</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上代码!">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于localStorage和sessionStorage">
+<meta property="og:url" content="http://leochan2017.github.io/2015/05/12/关于localStorage和sessionStorage/index.html">
+<meta property="og:site_name" content="Leo 前端开发工程师">
+<meta property="og:description" content="上代码!">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-16T09:10:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于localStorage和sessionStorage">
+<meta name="twitter:description" content="上代码!">
+  
+    <link rel="alternate" href="/atom.xml" title="Leo 前端开发工程师" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leo 前端开发工程师</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://leochan2017.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-关于localStorage和sessionStorage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/12/关于localStorage和sessionStorage/" class="article-date">
+  <time datetime="2015-05-12T14:32:07.000Z" itemprop="datePublished">2015-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于localStorage和sessionStorage
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上代码!</p>
+<a id="more"></a>
+
+<p>1.localStorage和sessionStorage均只能存储字符串类型的对象</p>
+<p>2.localStorage生命周期是永久</p>
+<p>3.sessionStorage生命周期为当前窗口或标签页，关闭了，数据就没了</p>
+<p>4.不同浏览器无法共享localStorage或sessionStorage中的信息。</p>
+<p>5.相同浏览器的不同页面间可以共享相同的localStorage（页面属于相同域名和端口），但是不同页面或标签页间无法共享sessionStorage的信息。这里需要注意的是，页面及标签页仅指顶级窗口，如果一个标签页包含多个iframe标签且他们属于同源页面，那么他们之间是可以共享sessionStorage的。 同源的判断规则： <a href="http://www.test.com/" target="_blank" rel="noopener">http://www.test.com</a> <a href="https://www.test.com/" target="_blank" rel="noopener">https://www.test.com</a> （不同源，因为协议不同） <a href="http://my.test.xn--com(%2C)-zp7ib81bka094neal332hc47dnsya/" target="_blank" rel="noopener">http://my.test.com（不同源，因为主机名不同）</a> <a href="http://www.test.com:8080（不同源，因为端口不同）/" target="_blank" rel="noopener">http://www.test.com:8080（不同源，因为端口不同）</a></p>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var arrDisplay = [0, 1, 1, 1];</span><br><span class="line">//存储，IE6~7 cookie 其他浏览器HTML5本地存储</span><br><span class="line"></span><br><span class="line">if (window.localStorage) &#123;</span><br><span class="line">    localStorage.setItem(&quot;menuTitle&quot;, arrDisplay);    </span><br><span class="line">&#125; else &#123;</span><br><span class="line">    Cookie.write(&quot;menuTitle&quot;, arrDisplay);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###数据读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var strStoreDate = window.localStorage? localStorage.getItem(&quot;menuTitle&quot;): Cookie.read(&quot;menuTitle&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是：虽然我们存储的是数组，但是，实际上存储的的是数组字符化后的字符串(Cookie和localStorage都是)，因此，我们在处理strStoreDate的时候，一定要当作字符串处理，类似下面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">strStoreDate.split(&quot;,&quot;).each(function(display, index) &#123;</span><br><span class="line">    //根据存储的display触发相对应的动作</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在HTML5中，本地存储是一个window的属性，判断浏览器是否支持：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(window.localStorage)&#123;</span><br><span class="line"> alert(&apos;This browser supports localStorage&apos;);</span><br><span class="line">&#125;else&#123;</span><br><span class="line"> alert(&apos;This browser does NOT support localStorage&apos;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>存储数据的方法就是直接给window.localStorage添加一个属性</p>
+<p>例如：window.localStorage.a 或者 window.localStorage[“a”]。</p>
+<p>它的读取、写、删除操作方法很简单，是以键值对的方式存在的，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">localStorage.a = 3;//设置a为&quot;3&quot;</span><br><span class="line">localStorage[&quot;a&quot;] = &quot;sfsf&quot;;//设置a为&quot;sfsf&quot;，覆盖上面的值</span><br><span class="line">localStorage.setItem(&quot;b&quot;,&quot;isaac&quot;);//设置b为&quot;isaac&quot;</span><br><span class="line">var a1 = localStorage[&quot;a&quot;];//获取a的值</span><br><span class="line">var a2 = localStorage.a;//获取a的值</span><br><span class="line">var b = localStorage.getItem(&quot;b&quot;);//获取b的值</span><br><span class="line">localStorage.removeItem(&quot;c&quot;);//清除c的值</span><br></pre></td></tr></table></figure>
+
+<p>推荐使用的自然是getItem()和setItem()，清除键值对使用removeItem()。</p>
+<p>如果希望一次性清除所有的键值对，可以使用clear()。另外，HTML5还提供了一个key()方法，可以在不知道有哪些键值的时候使用，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var storage = window.localStorage;</span><br><span class="line">function showStorage()&#123;</span><br><span class="line"> for(var i=0;i&quot;);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leochan2017.github.io/2015/05/12/关于localStorage和sessionStorage/" data-id="cjy5lzcxa000e3ws67zjawkm6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/01/Leo用sublime记事for mac/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Leo用sublime记事for mac
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/08/关于Prototype/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于Prototype</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/09/03/抛弃jquery/">抛弃jquery</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/01/Leo用sublime记事for mac/">Leo用sublime记事for mac</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/12/关于localStorage和sessionStorage/">关于localStorage和sessionStorage</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/08/关于Prototype/">关于Prototype</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/07/关于JavaScript命名空间/">关于JavaScript命名空间</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Leo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
